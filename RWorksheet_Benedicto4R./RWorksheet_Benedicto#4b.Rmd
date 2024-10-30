@@ -183,7 +183,9 @@ f. Interpret the result.
 #Versicolor and Virginica: Overlap more in their sepal dimensions, but Virginica generally has the largest sepal dimensions.
 
 
-7. Import the alexa-file.xlsx. Check on the variations. Notice that there are ex-
+7. Import the alexa-file.xlsx. Check on the variations. 
+
+Notice that there are ex-
 tra whitespaces among black variants (Black Dot, Black Plus, Black Show, Black
 
 Spot). Also on the white variants (White Dot, White Plus, White Show, White
@@ -193,14 +195,24 @@ library(readxl)
 
 alexa_data <- read_excel("alexa_file.xlsx")
 
+head(alexa_data)
 ```
 
 Figure 4: Snippet of Alexa Variations
 a. Rename the white and black variants by using gsub() function.
 ```{r}
-alexa_data$variation <- gsub("Black", "Dark", alexa_data$variation)
-alexa_data$variation <- gsub("White", "Light", alexa_data$variation)
+alexa_data$variation <- gsub("Black  Dot", "BlackDot", alexa_data$variation)
+alexa_data$variation <- gsub("Black  Plus", "BlackPlus", alexa_data$variation)
+alexa_data$variation <- gsub("Black  Show", "BlackShow", alexa_data$variation)
+alexa_data$variation <- gsub("Black  Spot", "BlackSpot", alexa_data$variation)
 
+# Fix "White" variants
+alexa_data$variation <- gsub("White  Dot", "WhiteDot", alexa_data$variation)
+alexa_data$variation <- gsub("White  Plus", "WhitePlus", alexa_data$variation)
+alexa_data$variation <- gsub("White  Show", "WhiteShow", alexa_data$variation)
+alexa_data$variation <- gsub("White  Spot", "WhiteSpot", alexa_data$variation)
+
+alexa_data$variation[1052:2000]
 ```
 Write the R scripts and show an example of the output by getting a snippet. To embed an image into Rmd, use the function below:
 
