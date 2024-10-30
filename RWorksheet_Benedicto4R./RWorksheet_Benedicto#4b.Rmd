@@ -39,21 +39,21 @@ in Figure
 up to 500. Use repeat and break statements. Write the R Scripts and its output.
 ```{r}
 # start <- as.integer(readline(prompt = "Enter the starting number: "))
+start <- 1
+a <- start
+b <- 1
+cat(a, b, sep = " ")
 
-#a <- start
-#b <- 1
-#cat(a, b, sep = " ")
-
-#repeat {
- # next_term <- a + b
- # if (!is.na(next_term) && next_term > 500) {
- #   break
-#  }
-#  cat(next_term, " ")
- # a <- b
-#  b <- next_term
-  #}
-#cat("\n")
+repeat {
+  next_term <- a + b
+  if (!is.na(next_term) && next_term > 500) {
+    break
+  }
+ cat(next_term, " ")
+  a <- b
+  b <- next_term
+  }
+cat("\n")
 ```
 4. Import the dataset as shown in Figure 1 you have created previously.
 a. What is the R script for importing an excel or a csv file? Display the first 6 rows of
