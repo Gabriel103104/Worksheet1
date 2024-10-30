@@ -178,9 +178,10 @@ ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species, shap
 f. Interpret the result.
 #The scatter plot of Sepal.Length vs. Sepal.Width shows the relationship between these two measurements for each species:
 
-#Setosa: Typically has smaller sepal lengths and widths, clustering separately from the other two species.
+#Setosa: Typically has higher sepal lengths and widths, clustering separately from the other two species.
+
 #Versicolor and Virginica: Overlap more in their sepal dimensions, but Virginica generally has the largest sepal dimensions.
-#Overall Pattern: The species are distinguishable based on sepal size, with Setosa forming a distinct cluster. Versicolor and Virginica have some overlap, but Virginica tends to have larger sepal lengths and widths on average. This plot illustrates how sepal dimensions vary by species and how these features can help differentiate the species.
+
 
 7. Import the alexa-file.xlsx. Check on the variations. Notice that there are ex-
 tra whitespaces among black variants (Black Dot, Black Plus, Black Show, Black
