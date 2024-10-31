@@ -258,31 +258,37 @@ barplot(
 ```
 d. Create a barplot() for the black and white variations. Plot it in 1 frame, side by side. Complete the details of the chart.
 ```{r}
-dark_variants <- subset(variation_counts, grepl("Dark", variation))
-light_variants <- subset(variation_counts, grepl("Light", variation))
+library(dplyr)
 
-dark_variants
-light_variants
+variation_counts <- alexa_data %>%
+  filter(grepl("Black|White", variation)) %>% # Filter for Black and White variations
+  count(variation)
 
-if (nrow(dark_variants) > 0 & nrow(light_variants) > 0) {
-  max_length <- max(nrow(dark_variants), nrow(light_variants))
-  dark_data <- c(dark_variants$n, rep(NA, max_length - nrow(dark_variants)))
-  light_data <- c(light_variants$n, rep(NA, max_length - nrow(light_variants)))
-  
-    bar_data <- rbind(dark_data, light_data)
-  colnames(bar_data) <- c(dark_variants$variation, light_variants$variation)[1:max_length]
+black_counts <- variation_counts %>%
+  filter(grepl("Black", variation))
+white_counts <- variation_counts %>%
+  filter(grepl("White", variation))
 
-   barplot(bar_data, 
-          beside = TRUE, 
-          col = c("darkgray", "lightgray"), 
-          main = "Dark and Light Variants Comparison", 
-          xlab = "Variation", 
-          ylab = "Total", 
-          names.arg = c(dark_variants$variation, light_variants$variation), 
-          legend.text = c("Dark Variants", "Light Variants"),
-          args.legend = list(x = "topright"))
-} else {
-  print("No data found for Dark or Light variants.")
-}
+par(mfrow = c(1, 2))
+
+variations <- variation_counts$variation
+counts <- variation_counts$n
+
+barplot(black_counts$n,
+        names.arg = black_counts$variation,
+        col = c("black", "pink", "green", "blue", "cyan"),
+        main = "Black Variants",
+        xlab = "Total Numbers",
+        ylab = "Variants",
+        ylim = c(0, max(black_counts$n) * 1.2))
+
+barplot(white_counts$n,
+        names.arg = white_counts$variation,
+        col = c("black", "pink", "green", "blue", "cyan"),
+        main = "White Variants",
+        xlab = "Total Numbers",
+        ylab = "Variants",
+        ylim = c(0, max(white_counts$n) * 1.2))
+
 ```
 
