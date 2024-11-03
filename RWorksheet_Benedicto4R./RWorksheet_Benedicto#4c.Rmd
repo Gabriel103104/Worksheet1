@@ -94,14 +94,38 @@ model_counts
 a. Plot using geom_bar() using the top 20 observations only. The graphs shoudl have a title, labels and
 colors. Show code and results.
 ```{r}
+library(dplyr)
+library(ggplot2)
+
+model_counts <- mpg_data %>%
+  group_by(model) %>%
+  summarise(car_count = n()) %>%
+  arrange(desc(car_count)) %>%
+  slice_head(n = 20)  
+
+ggplot(model_counts, aes(x = reorder(model, -car_count), y = car_count, fill = model)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  labs(
+    title = "Top 20 Car Models by Count",
+    x = "Car Model",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
+
+```
+
+b. Plot using the geom_bar() + coord_flip() just like what is shown below. Show codes and its result.
+```{r}
 ggplot(model_counts, aes(x = reorder(model, -car_count), y = car_count, fill = model)) +
   geom_bar(stat = "identity") +
   labs(title = "Top 20 Car Models by Count",
        x = "Car Model",
        y = "Number of Cars") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_discrete(name = "Car Model") 
+  scale_fill_discrete(name = "Car Model") +
+  coord_flip()
+
 ```
 5. Plot the relationship between cyl - number of cylinders and displ - engine displacement using
 geom_point with aesthetic color = engine displacement. Title should be “Relationship between
